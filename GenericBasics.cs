@@ -64,11 +64,11 @@ namespace AbstractExample
 
 
 
-            List<string> commann = new List<string>();
+            List<string> commanList = new List<string>();
 
-            commann.Add("Hello");
-            commann.Add("World");
-            commann.Add("This is a test");
+            commanList.Add("Hello");
+            commanList.Add("World");
+            commanList.Add("This is a test");
 
            
 
