@@ -8,23 +8,25 @@ namespace AbstractExampleNotification
 {
     public interface ISendMessage
     {
-        public string Send(string message);
+        public string Message { get; set; }
+        public string Send();
     }
     public class Notifications
     {
 
-        public void SendMessage(ISendMessage sendMessage, string msg)
+        public void SendMessage(ISendMessage sendMessage)
         {
             // Send message to SMS
-            sendMessage.Send(msg);
+            sendMessage.Send();
         }
     }
 
     public class SMSMessage : ISendMessage
     {
-        public string Send(string message)
+        public string Message { get; set; }
+        public string Send()
         {
-            string str = $"Message {message} sent via SMS";
+            string str = $"Message {Message} sent via SMS";
             return str;
         }
     }
@@ -32,9 +34,11 @@ namespace AbstractExampleNotification
 
     public class EmailMessage : ISendMessage
     {
-        public string Send(string message)
+        public string Message { get; set; }
+
+        public string Send()
         {
-            string str = $"Message {message} sent via EMail";
+            string str = $"Message {Message} sent via EMail";
             return str;
         }
 
@@ -42,9 +46,10 @@ namespace AbstractExampleNotification
 
     public class WhatsAppMessage : ISendMessage
     {
-        public string Send(string message)
+        public string Message { get; set; }
+        public string Send()
         {
-            string str = $"Message {message} sent via WhatsApp";
+            string str = $"Message {Message} sent via WhatsApp";
             return str;
         }
     }
@@ -54,11 +59,13 @@ namespace AbstractExampleNotification
         public static void Main(string[] args)
         {
             SMSMessage smsMessage = new SMSMessage();
+            smsMessage.Message = "Hello World";
             EmailMessage emailMessage = new EmailMessage();
+            emailMessage.Message = "Hello World";
 
 
             Notifications notifications = new Notifications();
-            notifications.SendMessage(emailMessage, "Good Morning");
+            notifications.SendMessage(emailMessage);
 
         }
     }
