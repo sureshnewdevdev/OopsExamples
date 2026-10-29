@@ -11,8 +11,9 @@ namespace AbstractExample
     {
         public static void Main(string[] args)
         {
+            #region Draft
             int x = 0;
-            x=x + 10;
+            x = x + 10;
             int[] ints = new int[5]; // strict to data type, limited to 5 elements, rezizable but need more steps 
 
             ArrayList arrayList = new ArrayList(); // not strict to data type, can hold any type of data, can hold any number of elements, but not type safe
@@ -21,7 +22,7 @@ namespace AbstractExample
             arrayList.Add("Hello");
             arrayList.Add(3.14);
 
-            for (int i = 0; i < arrayList.Count-1; i++)
+            for (int i = 0; i < arrayList.Count - 1; i++)
             {
                 Console.WriteLine(arrayList[i]);
             }
@@ -53,7 +54,7 @@ namespace AbstractExample
             List<DateTime> dateTimeList = new List<DateTime>();
 
             dateTimeList.Add(DateTime.Now);
-            dateTimeList.Add(DateTime.Now.AddDays(-3)); 
+            dateTimeList.Add(DateTime.Now.AddDays(-3));
             dateTimeList.Add(DateTime.Now.AddDays(5));
             dateTimeList.Add(DateTime.Now.AddDays(78));
 
@@ -70,12 +71,48 @@ namespace AbstractExample
             commanList.Add("World");
             commanList.Add("This is a test");
 
-           
+            #endregion
 
+
+            Calculator<int> intCalculator = new Calculator<int>();
+            intCalculator.Add(10, 20);
+
+            Calculator<double> doubleCalculator = new Calculator<double>();
+            doubleCalculator.Add(10.5, 20.5);
+
+ 
 
             Console.ReadLine();
 
 
+        }
+    }
+
+    public class Calculator<T>  
+    {
+        public T Add(T a, T b)
+        {
+            dynamic x = a;
+            dynamic y = b;
+            return x + y;
+        }
+        public T Subtract(T a, T b)
+        {
+            dynamic x = a;
+            dynamic y = b;
+            return x - y;
+        }
+        public T Multiply(T a, T b)
+        {
+            dynamic x = a;
+            dynamic y = b;
+            return x * y;
+        }
+        public T Divide(T a, T b)
+        {
+            dynamic x = a;
+            dynamic y = b;
+            return x / y;
         }
     }
 }
