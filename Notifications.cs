@@ -8,9 +8,11 @@ namespace AbstractExampleNotification
 {
     public interface ISendMessage
     {
-        public string Message { get; set; }
+        public  string Message { get; set; }
         public string Send();
     }
+
+ 
     public class Notifications
     {
 
