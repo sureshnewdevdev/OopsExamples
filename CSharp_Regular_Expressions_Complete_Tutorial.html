@@ -1,0 +1,211 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Regular Expressions in C# — ITTechGenie Tutorial</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:20px}body{margin:0;background:#f3f6fb;color:#203248;font:16px/1.75 system-ui,-apple-system,"Segoe UI",sans-serif}header{padding:64px max(24px,calc((100vw - 1150px)/2));background:#102c4a;color:white;border-bottom:7px solid #18b6a0}.eyebrow{font-size:12px;letter-spacing:2px;font-weight:750;color:#7ee4d3}h1{font-size:clamp(34px,5vw,54px);letter-spacing:-1.3px;line-height:1.12;margin:14px 0 20px}header p{max-width:760px;color:#dce8f6}.tag{display:inline-block;padding:4px 12px;margin:4px 7px 0 0;border:1px solid #5f7892;border-radius:24px;font-size:13px}.layout{max-width:1200px;padding:30px 24px;margin:auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:30px}nav{position:sticky;top:16px;align-self:start;background:white;border:1px solid #dce4ef;border-radius:12px;padding:18px;max-height:calc(100vh - 32px);overflow:auto}nav a{display:block;color:#385873;text-decoration:none;font-size:13px;padding:5px 0;line-height:1.45}nav a:hover{color:#087c70;text-decoration:underline}main{min-width:0}section{padding:30px;background:white;border:1px solid #dce4ef;border-radius:13px;margin-bottom:24px}h2{font-size:26px;line-height:1.35;letter-spacing:-.4px;margin:0 0 20px;color:#153f60}h2 small{display:block;color:#0b8879;font-size:12px;text-transform:uppercase;letter-spacing:1px;margin-bottom:7px}h3{color:#194b6b;margin-top:28px}p{margin:14px 0}code{font-family:Consolas,"Liberation Mono",monospace;font-size:.9em}p code,li code,td code{background:#edf3f9;padding:2px 5px;border-radius:4px;overflow-wrap:anywhere}.codebox{margin:20px 0;border-radius:9px;overflow:hidden;background:#11243a;color:#ecf3ff}.codehead{background:#1e3650;color:#bcd2e8;font-size:12px;letter-spacing:.5px;padding:9px 15px;display:flex;align-items:center;justify-content:space-between}.copy{border:1px solid #5c7793;background:transparent;color:white;border-radius:5px;padding:3px 11px;cursor:pointer}pre{margin:0;padding:20px;overflow-x:auto;line-height:1.65;tab-size:4}.tablewrap{overflow-x:auto;margin:20px 0}table{border-collapse:collapse;width:100%;font-size:14px}th,td{text-align:left;vertical-align:top;padding:12px 14px;border:1px solid #dbe5ee;overflow-wrap:anywhere}th{background:#eaf3f8;color:#194867}tr:nth-child(even){background:#f8fafc}.note{border-left:4px solid #0ba68d;background:#eaf9f5;padding:16px 19px;margin:20px 0;border-radius:0 7px 7px 0;font-size:14px}li{margin:8px 0}a{color:#08688e}.flow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:22px 0}.flow div{padding:16px;background:#edf5fd;border:1px solid #c2d8ed;border-radius:9px;font-size:14px}.flow span{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:#147d91;color:white;margin-right:9px;font-weight:700}.toolbar{padding:15px 0;max-width:1200px;margin:auto;text-align:right}.print{background:#0b7e71;border:0;color:white;font:inherit;padding:10px 18px;border-radius:7px;cursor:pointer}footer{padding:25px;text-align:center;color:#63788d;font-size:13px}@media(max-width:900px){.layout{grid-template-columns:1fr}nav{position:static;max-height:280px}section{padding:22px}.toolbar{padding:15px 24px}}@media(max-width:500px){.layout{padding:18px 12px}section{padding:18px}h2{font-size:23px}.flow{grid-template-columns:1fr}pre{padding:15px;font-size:12px}td,th{padding:9px}}@media print{body{background:white;font-size:10pt}header{padding:10px 0;background:white;color:#142f48;border-bottom:2px solid #17486b}header p,.eyebrow{color:#304f6d}h1{font-size:30pt}.tag{border-color:#aaa}.layout{display:block;margin:0;padding:0}nav,.toolbar,.copy{display:none}section{border:0;border-radius:0;padding:18px 0;margin:0}h2,h3{break-after:avoid}.codebox{background:#f5f7fa;color:#111;border:1px solid #bbb}.codehead{background:#e9eef4;color:#222}pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:8pt}.tablewrap{overflow:visible}tr,.note,.flow{break-inside:avoid}a{color:#17456b}@page{size:A4;margin:15mm}}</style></head><body><header><div class="eyebrow">ITTECHGENIE · C# / .NET</div><h1>Regular Expressions<br>in C#</h1><p>Understand the Regex class, form patterns step by step, and practise validation, extraction, replacement and splitting through workplace examples.</p><span class="tag">Concept → Pattern → Code → Output</span><span class="tag">Complete console examples</span><span class="tag">Offline reading</span></header><div class="toolbar"><button class="print" onclick="window.print()">Print / Save as PDF</button></div><div class="layout"><nav aria-label="Tutorial contents"><strong>Contents</strong><a href="#s1">01. What is a regular expression?</a><a href="#s2">02. How matching works</a><a href="#s3">03. The Regex class and practice setup</a><a href="#s4">04. First program: employee ID validation</a><a href="#s5">05. C# string syntax: why patterns use @</a><a href="#s6">06. Forming patterns: literals and character classes</a><a href="#s7">07. Shortcuts, quantifiers and anchors</a><a href="#s8">08. Grouping, alternatives and escaping</a><a href="#s9">09. Build a username pattern step by step</a><a href="#s10">10. Methods: choose the right operation</a><a href="#s11">11. IsMatch(): validate product codes</a><a href="#s12">12. Match(): extract the first reference</a><a href="#s13">13. Matches(): extract every invoice reference</a><a href="#s14">14. Named groups: extract fields</a><a href="#s15">15. Replace(): clean and rearrange text</a><a href="#s16">16. Split(): handle mixed separators</a><a href="#s17">17. RegexOptions: change matching behavior</a><a href="#s18">18. Regex.Escape(): use literal search text</a><a href="#s19">19. Greedy and lazy matching</a><a href="#s20">20. Complete lab: support ticket processor</a><a href="#s21">21. Common mistakes and reliable evaluation</a><a href="#s22">22. When Regex is the right tool</a><a href="#s23">23. Practice questions</a><a href="#s24">24. Official references</a></nav><main><section id="s1"><h2><small>Lesson 01</small>What is a regular expression?</h2><p>A <strong>regular expression</strong>, usually called <strong>Regex</strong>, is a pattern used to find, validate, extract, replace or split text. Instead of writing many character-by-character checks, you describe the text structure that your application expects.</p><p>Imagine an employee registration application. Employee IDs follow the format <code>EMP-1001</code>, usernames allow only certain characters, and imported customer names contain extra spaces. Regex helps express these rules.</p><div class="tablewrap"><table><thead><tr><th>Workplace requirement</th><th>Regex operation</th></tr></thead><tbody><tr><td>Check an employee ID</td><td>Validate</td></tr><tr><td>Read order references from a message</td><td>Extract</td></tr><tr><td>Clean repeated whitespace</td><td>Replace</td></tr><tr><td>Separate a mixed-delimiter field</td><td>Split</td></tr></tbody></table></div><aside class="note">Regex checks text structure. An ID matching the correct format does not prove that the employee exists. Check existence separately.</aside></section><section id="s2"><h2><small>Lesson 02</small>How matching works</h2><div class="tablewrap"><table><thead><tr><th>Component</th><th>Meaning</th><th>Example</th></tr></thead><tbody><tr><td>Input</td><td>Text to examine</td><td>EMP-1001</td></tr><tr><td>Pattern</td><td>Rule to apply</td><td>\AEMP-[0-9]{4}\z</td></tr><tr><td>Operation</td><td>Action to perform</td><td>IsMatch()</td></tr></tbody></table></div><div class="flow" role="img" aria-label="Read the input then Apply the pattern then Inspect match result then Accept or report invalid input"><div><span>1</span>Read the input</div><div><span>2</span>Apply the pattern</div><div><span>3</span>Inspect match result</div><div><span>4</span>Accept or report invalid input</div></div><p>The engine evaluates the pattern against the input. A search may find text anywhere in the input; a validation pattern should normally require the complete input to match.</p></section><section id="s3"><h2><small>Lesson 03</small>The Regex class and practice setup</h2><p>The <code>Regex</code> class is in <code>System.Text.RegularExpressions</code>, part of the .NET Base Class Library. No additional NuGet package is needed for a normal console application.</p><ul><li>Open Visual Studio and choose <strong>Create a new project → Console App</strong> for C#.</li><li>Name the project <strong>RegexPractice</strong>. A .NET 8 console project supports the examples here.</li><li>Open <strong>Program.cs</strong>, replace its contents with one complete example, and run with <strong>Ctrl + F5</strong>.</li><li>Run each example separately. Do not paste multiple complete examples into the same Program.cs.</li></ul><p>Alternatively, create and run the project from a terminal:</p><div class="codebox"><div class="codehead">C# / Program.cs<button class="copy" type="button">Copy</button></div><pre><code>dotnet new console -n RegexPractice
+cd RegexPractice
+dotnet run</code></pre></div><aside class="note">The terminal block above contains shell commands. The remaining runnable examples contain C# code for Program.cs.</aside></section><section id="s4"><h2><small>Lesson 04</small>First program: employee ID validation</h2><p>Requirement: the input must contain <code>EMP-</code> followed by exactly four ASCII digits, with no extra text.</p><div class="codebox"><div class="codehead">C# / Program.cs<button class="copy" type="button">Copy</button></div><pre><code>using System;
+using System.Text.RegularExpressions;
+
+string employeeId = &quot;EMP-1001&quot;;
+string pattern = @&quot;\AEMP-[0-9]{4}\z&quot;;
+Regex employeeIdRegex = new Regex(
+    pattern, RegexOptions.None, TimeSpan.FromSeconds(1));
+
+bool isValid = employeeIdRegex.IsMatch(employeeId);
+Console.WriteLine($&quot;Employee ID: {employeeId}&quot;);
+Console.WriteLine($&quot;Valid: {isValid}&quot;);</code></pre></div><div class="codebox"><div class="codehead">Expected output</div><pre><code>Employee ID: EMP-1001
+Valid: True</code></pre></div><div class="tablewrap"><table><thead><tr><th>Pattern part</th><th>Meaning</th></tr></thead><tbody><tr><td>\A</td><td>Absolute beginning of input</td></tr><tr><td>EMP-</td><td>Literal characters</td></tr><tr><td>[0-9]</td><td>One ASCII digit</td></tr><tr><td>{4}</td><td>Exactly four repetitions</td></tr><tr><td>\z</td><td>Absolute end of input</td></tr></tbody></table></div><div class="tablewrap"><table><thead><tr><th>Input</th><th>Valid?</th><th>Reason</th></tr></thead><tbody><tr><td>EMP-1001</td><td>Yes</td><td>Correct format</td></tr><tr><td>EMP-0007</td><td>Yes</td><td>Four digits</td></tr><tr><td>EMP-101</td><td>No</td><td>Too short</td></tr><tr><td>EMP-10001</td><td>No</td><td>Too long</td></tr><tr><td>emp-1001</td><td>No</td><td>Case differs</td></tr><tr><td>ABC EMP-1001</td><td>No</td><td>Extra prefix</td></tr><tr><td>EMP-10A1</td><td>No</td><td>Letter in numeric part</td></tr></tbody></table></div><aside class="note">The one-second timeout is an example limit, not a universal setting. Choose an appropriate limit for your application and handle timeouts when processing external input.</aside></section><section id="s5"><h2><small>Lesson 05</small>C# string syntax: why patterns use @</h2><p>The <code>@</code> belongs to C# string syntax. It makes a verbatim string, allowing backslashes to be written directly. It is not a Regex operator.</p><div class="codebox"><div class="codehead">C# / Program.cs<button class="copy" type="button">Copy</button></div><pre><code>string normalPattern = &quot;\\d+&quot;;
+string verbatimPattern = @&quot;\d+&quot;;</code></pre></div><p>Both string forms above represent the same Regex pattern: one or more decimal digits.</p><div class="tablewrap"><table><thead><tr><th>C# expression</th><th>Meaning</th></tr></thead><tbody><tr><td>@&quot;\bcat\b&quot;</td><td>Regex word boundaries around cat</td></tr><tr><td>&quot;\bcat\b&quot;</td><td>C# backspace characters around cat</td></tr><tr><td>&quot;\\bcat\\b&quot;</td><td>Regex word boundaries using a normal C# string</td></tr></tbody></table></div><aside class="note">There are two syntax layers: C# first creates a string, and the Regex engine then interprets the characters inside that string.</aside></section><section id="s6"><h2><small>Lesson 06</small>Forming patterns: literals and character classes</h2><p>Ordinary letters and digits usually match themselves. The pattern <code>Invoice</code> finds that exact text anywhere in an input unless you add anchors.</p><div class="tablewrap"><table><thead><tr><th>Pattern</th><th>Meaning</th></tr></thead><tbody><tr><td>[ABC]</td><td>One character: A, B or C</td></tr><tr><td>[A-Z]</td><td>One uppercase English letter</td></tr><tr><td>[a-z]</td><td>One lowercase English letter</td></tr><tr><td>[0-9]</td><td>One ASCII digit</td></tr><tr><td>[A-Za-z]</td><td>One uppercase or lowercase English letter</td></tr><tr><td>[A-Za-z0-9]</td><td>One English letter or ASCII digit</td></tr><tr><td>[^0-9]</td><td>One character that is not an ASCII digit</td></tr></tbody></table></div><p>For example, <code>[A-Z][0-9]</code> matches pairs such as <code>A1</code>, <code>B7</code> and <code>Z9</code>. A character class describes one position unless a quantifier repeats it.</p></section><section id="s7"><h2><small>Lesson 07</small>Shortcuts, quantifiers and anchors</h2><div class="tablewrap"><table><thead><tr><th>Shortcut</th><th>Meaning in normal .NET matching</th></tr></thead><tbody><tr><td>\d</td><td>A Unicode decimal digit</td></tr><tr><td>\D</td><td>A character that is not a decimal digit</td></tr><tr><td>\w</td><td>A word character, including Unicode letters, digits and underscore</td></tr><tr><td>\W</td><td>A non-word character</td></tr><tr><td>\s</td><td>A whitespace character</td></tr><tr><td>\S</td><td>A non-whitespace character</td></tr><tr><td>.</td><td>Any character except newline (
+), by default</td></tr><tr><td>\b</td><td>A word boundary</td></tr></tbody></table></div><aside class="note">Use <code>[0-9]</code> when identifiers must accept only ASCII digits. <code>\d</code> also accepts other Unicode decimal digits. <code>\w</code> does not mean English letters only.</aside><div class="tablewrap"><table><thead><tr><th>Quantifier</th><th>Meaning</th><th>Example</th></tr></thead><tbody><tr><td>*</td><td>Zero or more</td><td>[0-9]*</td></tr><tr><td>+</td><td>One or more</td><td>[0-9]+</td></tr><tr><td>?</td><td>Zero or one</td><td>colou?r</td></tr><tr><td>{n}</td><td>Exactly n</td><td>[0-9]{4}</td></tr><tr><td>{n,}</td><td>At least n</td><td>[0-9]{2,}</td></tr><tr><td>{n,m}</td><td>Between n and m</td><td>[0-9]{2,5}</td></tr></tbody></table></div><p><code>colou?r</code> matches both <code>color</code> and <code>colour</code>: only the preceding <code>u</code> is optional.</p><div class="tablewrap"><table><thead><tr><th>Anchor</th><th>Meaning</th></tr></thead><tbody><tr><td>^</td><td>Beginning of input, or a line with Multiline</td></tr><tr><td>$</td><td>End of input or before a final newline; also line endings with Multiline</td></tr><tr><td>\A</td><td>Absolute beginning of input</td></tr><tr><td>\z</td><td>Absolute end of input</td></tr></tbody></table></div><p><code>[0-9]{4}</code> finds four digits inside <code>Order 1234 created</code>. In contrast, <code>\A[0-9]{4}\z</code> requires the entire input to contain exactly four digits.</p></section><section id="s8"><h2><small>Lesson 08</small>Grouping, alternatives and escaping</h2><div class="tablewrap"><table><thead><tr><th>Syntax</th><th>Purpose</th><th>Example</th></tr></thead><tbody><tr><td>|</td><td>Alternation: choose one alternative</td><td>Pending|Approved|Rejected</td></tr><tr><td>(...)</td><td>Group and capture</td><td>(EMP|CON)</td></tr><tr><td>(?:...)</td><td>Group without capturing</td><td>(?:EMP|CON)</td></tr><tr><td>(?&lt;name&gt;...)</td><td>Capture under a name</td><td>(?&lt;code&gt;[A-Z]{3})</td></tr><tr><td>\.</td><td>Match a literal dot</td><td>report\.csv</td></tr></tbody></table></div><p>To validate a complete status, group the alternatives: <code>\A(?:Pending|Approved|Rejected)\z</code>.</p><p>Characters such as <code>. ^ $ * + ? ( ) [ ] { } \ |</code> have special meanings. Escape them when you need their literal form.</p><p><code>\Areport\.csv\z</code> matches <code>report.csv</code>. An unescaped dot would permit a different character in that position.</p></section><section id="s9"><h2><small>Lesson 09</small>Build a username pattern step by step</h2><p>Requirement: start with an English letter, allow only English letters, digits and underscores, and require 5–12 characters in total.</p><div class="tablewrap"><table><thead><tr><th>Step</th><th>Rule</th><th>Pattern part</th></tr></thead><tbody><tr><td>1</td><td>Start of input</td><td>\A</td></tr><tr><td>2</td><td>First character is a letter</td><td>[A-Za-z]</td></tr><tr><td>3</td><td>Remaining permitted characters</td><td>[A-Za-z0-9_]</td></tr><tr><td>4</td><td>4–11 more characters</td><td>{4,11}</td></tr><tr><td>5</td><td>End of input</td><td>\z</td></tr></tbody></table></div><aside class="note">The first character already counts toward the total. One initial character plus 4–11 remaining characters gives a length of 5–12.</aside><div class="codebox"><div class="codehead">C# / Program.cs<button class="copy" type="button">Copy</button></div><pre><code>using System;
+using System.Text.RegularExpressions;
+
+Regex usernameRegex = new Regex(
+    @&quot;\A[A-Za-z][A-Za-z0-9_]{4,11}\z&quot;,
+    RegexOptions.None, TimeSpan.FromSeconds(1));
+
+string[] usernames =
+{
+    &quot;Ravi_123&quot;, &quot;1Ravi&quot;, &quot;Ram&quot;, &quot;Priya@123&quot;, &quot;Training_User_2026&quot;
+};
+foreach (string username in usernames)
+    Console.WriteLine($&quot;{username}: {usernameRegex.IsMatch(username)}&quot;);</code></pre></div><div class="codebox"><div class="codehead">Expected output</div><pre><code>Ravi_123: True
+1Ravi: False
+Ram: False
+Priya@123: False
+Training_User_2026: False</code></pre></div></section><section id="s10"><h2><small>Lesson 10</small>Methods: choose the right operation</h2><div class="tablewrap"><table><thead><tr><th>Method</th><th>Purpose</th><th>Return type</th></tr></thead><tbody><tr><td>IsMatch()</td><td>Does a match exist?</td><td>bool</td></tr><tr><td>Match()</td><td>First match</td><td>Match</td></tr><tr><td>Matches()</td><td>All matches</td><td>MatchCollection</td></tr><tr><td>Replace()</td><td>Replace matching text</td><td>string</td></tr><tr><td>Split()</td><td>Split at matching separators</td><td>string[]</td></tr><tr><td>Escape()</td><td>Escape literal text for use in a pattern</td><td>string</td></tr></tbody></table></div><p>You can use a reusable instance or a static convenience method. The examples mainly use instances so that the pattern, options and timeout are defined together.</p><div class="codebox"><div class="codehead">C# / Program.cs<button class="copy" type="button">Copy</button></div><pre><code>// Static form; this is a syntax illustration.
+bool valid = Regex.IsMatch(
+    &quot;EMP-1001&quot;, @&quot;\AEMP-[0-9]{4}\z&quot;,
+    RegexOptions.None, TimeSpan.FromSeconds(1));</code></pre></div></section><section id="s11"><h2><small>Lesson 11</small>IsMatch(): validate product codes</h2><p>Product codes require three uppercase English letters, a hyphen and four ASCII digits.</p><div class="codebox"><div class="codehead">C# / Program.cs<button class="copy" type="button">Copy</button></div><pre><code>using System;
+using System.Text.RegularExpressions;
+
+Regex productCodeRegex = new Regex(
+    @&quot;\A[A-Z]{3}-[0-9]{4}\z&quot;,
+    RegexOptions.None, TimeSpan.FromSeconds(1));
+
+string[] codes = { &quot;PRD-1025&quot;, &quot;AB-1025&quot;, &quot;PRD1025&quot;, &quot;prd-1025&quot; };
+foreach (string code in codes)
+{
+    string result = productCodeRegex.IsMatch(code) ? &quot;Accepted&quot; : &quot;Rejected&quot;;
+    Console.WriteLine($&quot;{code}: {result}&quot;);
+}</code></pre></div><div class="codebox"><div class="codehead">Expected output</div><pre><code>PRD-1025: Accepted
+AB-1025: Rejected
+PRD1025: Rejected
+prd-1025: Rejected</code></pre></div><p><code>IsMatch()</code> gives a Boolean result. It does not return the matching text.</p></section><section id="s12"><h2><small>Lesson 12</small>Match(): extract the first reference</h2><p>A support message contains two order references. Retrieve only the first.</p><div class="codebox"><div class="codehead">C# / Program.cs<button class="copy" type="button">Copy</button></div><pre><code>using System;
+using System.Text.RegularExpressions;
+
+string message = &quot;Please check order ORD-2045 before ORD-2099.&quot;;
+Regex orderRegex = new Regex(
+    @&quot;\bORD-[0-9]{4}\b&quot;, RegexOptions.None, TimeSpan.FromSeconds(1));
+Match match = orderRegex.Match(message);
+if (match.Success)
+{
+    Console.WriteLine($&quot;Order: {match.Value}&quot;);
+    Console.WriteLine($&quot;Position: {match.Index}&quot;);
+    Console.WriteLine($&quot;Length: {match.Length}&quot;);
+}
+else
+    Console.WriteLine(&quot;No order number found.&quot;);</code></pre></div><div class="codebox"><div class="codehead">Expected output</div><pre><code>Order: ORD-2045
+Position: 19
+Length: 8</code></pre></div><div class="tablewrap"><table><thead><tr><th>Property</th><th>Purpose</th></tr></thead><tbody><tr><td>Success</td><td>Whether matching succeeded</td></tr><tr><td>Value</td><td>Matched text</td></tr><tr><td>Index</td><td>Zero-based starting position</td></tr><tr><td>Length</td><td>Matched character count</td></tr><tr><td>Groups</td><td>Captured portions</td></tr></tbody></table></div><aside class="note">If there is no match, Match() returns an unsuccessful Match object, not null. Check <code>Success</code>.</aside></section><section id="s13"><h2><small>Lesson 13</small>Matches(): extract every invoice reference</h2><div class="codebox"><div class="codehead">C# / Program.cs<button class="copy" type="button">Copy</button></div><pre><code>using System;
+using System.Text.RegularExpressions;
+
+string message = &quot;Paid INV-1001 and INV-1002; pending INV-1003.&quot;;
+Regex invoiceRegex = new Regex(
+    @&quot;\bINV-[0-9]{4}\b&quot;, RegexOptions.None, TimeSpan.FromSeconds(1));
+try
+{
+    MatchCollection matches = invoiceRegex.Matches(message);
+    Console.WriteLine($&quot;Invoice count: {matches.Count}&quot;);
+    foreach (Match match in matches)
+        Console.WriteLine(match.Value);
+}
+catch (RegexMatchTimeoutException)
+{
+    Console.WriteLine(&quot;Invoice search exceeded the time limit.&quot;);
+}</code></pre></div><div class="codebox"><div class="codehead">Expected output</div><pre><code>Invoice count: 3
+INV-1001
+INV-1002
+INV-1003</code></pre></div><p>Matches are evaluated lazily. When you handle timeouts, include collection access and enumeration inside the try block: a timeout can occur while retrieving the results.</p></section><section id="s14"><h2><small>Lesson 14</small>Named groups: extract fields</h2><p>An inventory record contains both a product code and quantity. Capture each field by name.</p><div class="codebox"><div class="codehead">C# / Program.cs<button class="copy" type="button">Copy</button></div><pre><code>using System;
+using System.Text.RegularExpressions;
+
+string record = &quot;ITEM: PRD-1025; QTY: 12&quot;;
+Regex recordRegex = new Regex(
+    @&quot;\AITEM:\s*(?&lt;code&gt;[A-Z]{3}-[0-9]{4});\s*QTY:\s*(?&lt;quantity&gt;[0-9]+)\z&quot;,
+    RegexOptions.None, TimeSpan.FromSeconds(1));
+Match match = recordRegex.Match(record);
+if (match.Success)
+{
+    Console.WriteLine($&quot;Product code: {match.Groups[&quot;code&quot;].Value}&quot;);
+    Console.WriteLine($&quot;Quantity text: {match.Groups[&quot;quantity&quot;].Value}&quot;);
+}
+else
+    Console.WriteLine(&quot;Invalid record format.&quot;);</code></pre></div><div class="codebox"><div class="codehead">Expected output</div><pre><code>Product code: PRD-1025
+Quantity text: 12</code></pre></div><div class="tablewrap"><table><thead><tr><th>Pattern part</th><th>Meaning</th></tr></thead><tbody><tr><td>ITEM: and QTY:</td><td>Literal labels</td></tr><tr><td>\s*</td><td>Zero or more whitespace characters</td></tr><tr><td>(?&lt;code&gt;...)</td><td>Named product code capture</td></tr><tr><td>;</td><td>Literal separator</td></tr><tr><td>(?&lt;quantity&gt;[0-9]+)</td><td>Named capture of one or more digits</td></tr></tbody></table></div><aside class="note">Captured values are strings. Use int.TryParse() and numeric checks before treating a quantity as an integer. A long digit sequence can match the pattern but exceed the range of int.</aside></section><section id="s15"><h2><small>Lesson 15</small>Replace(): clean and rearrange text</h2><p>An imported customer name contains repeated spaces and a tab. Replace each whitespace sequence with one space, then trim the edges.</p><div class="codebox"><div class="codehead">C# / Program.cs<button class="copy" type="button">Copy</button></div><pre><code>using System;
+using System.Text.RegularExpressions;
+
+string original = &quot;  Ravi    Kumar\tSharma  &quot;;
+Regex whitespaceRegex = new Regex(
+    @&quot;\s+&quot;, RegexOptions.None, TimeSpan.FromSeconds(1));
+string cleaned = whitespaceRegex.Replace(original, &quot; &quot;).Trim();
+Console.WriteLine($&quot;Cleaned: [{cleaned}]&quot;);</code></pre></div><div class="codebox"><div class="codehead">Expected output</div><pre><code>Cleaned: [Ravi Kumar Sharma]</code></pre></div><p><code>\s+</code> matches one or more whitespace characters. Because this includes line breaks, the same replacement can flatten multiline text.</p><h3>Rearrange a name using groups</h3><div class="codebox"><div class="codehead">C# / Program.cs<button class="copy" type="button">Copy</button></div><pre><code>using System;
+using System.Text.RegularExpressions;
+
+Regex nameRegex = new Regex(
+    @&quot;\A(?&lt;last&gt;[A-Za-z]+),\s*(?&lt;first&gt;[A-Za-z]+)\z&quot;,
+    RegexOptions.None, TimeSpan.FromSeconds(1));
+string result = nameRegex.Replace(&quot;Kumar, Ravi&quot;, &quot;${first} ${last}&quot;);
+Console.WriteLine(result);</code></pre></div><div class="codebox"><div class="codehead">Expected output</div><pre><code>Ravi Kumar</code></pre></div><p>Replacement references <code>${first}</code> and <code>${last}</code> reuse captured values. This simplified pattern accepts single English-letter name parts only; it is not a universal personal-name validator.</p></section><section id="s16"><h2><small>Lesson 16</small>Split(): handle mixed separators</h2><div class="codebox"><div class="codehead">C# / Program.cs<button class="copy" type="button">Copy</button></div><pre><code>using System;
+using System.Text.RegularExpressions;
+
+string input = &quot;HR,Finance;IT|Training&quot;;
+Regex separatorRegex = new Regex(
+    @&quot;[,;|]&quot;, RegexOptions.None, TimeSpan.FromSeconds(1));
+string[] departments = separatorRegex.Split(input);
+foreach (string department in departments)
+    Console.WriteLine(department.Trim());</code></pre></div><div class="codebox"><div class="codehead">Expected output</div><pre><code>HR
+Finance
+IT
+Training</code></pre></div><p>Inside <code>[,;|]</code>, the vertical bar is a literal separator, not alternation. Adjacent separators can produce empty strings; decide whether to reject or ignore them.</p><aside class="note">For fixed literal separators, string.Split() may already meet the requirement. Regex is useful when separators need a pattern. Capturing groups in a Split pattern can also cause captured separators to appear in the result; use non-capturing groups when appropriate.</aside></section><section id="s17"><h2><small>Lesson 17</small>RegexOptions: change matching behavior</h2><div class="tablewrap"><table><thead><tr><th>Option</th><th>Purpose</th></tr></thead><tbody><tr><td>None</td><td>Default matching</td></tr><tr><td>IgnoreCase</td><td>Case-insensitive matching</td></tr><tr><td>Multiline</td><td>Make ^ and $ operate at line boundaries</td></tr><tr><td>Singleline</td><td>Allow . to match newline characters</td></tr><tr><td>IgnorePatternWhitespace</td><td>Allow formatting whitespace and comments in patterns</td></tr><tr><td>CultureInvariant</td><td>Culture-independent behavior for relevant operations</td></tr></tbody></table></div><div class="codebox"><div class="codehead">C# / Program.cs<button class="copy" type="button">Copy</button></div><pre><code>using System;
+using System.Text.RegularExpressions;
+
+string log = &quot;WARN: Disk usage high. warn: Retry scheduled.&quot;;
+Regex warningRegex = new Regex(
+    @&quot;\bwarn\b&quot;,
+    RegexOptions.IgnoreCase | RegexOptions.CultureInvariant,
+    TimeSpan.FromSeconds(1));
+foreach (Match match in warningRegex.Matches(log))
+    Console.WriteLine(match.Value);</code></pre></div><div class="codebox"><div class="codehead">Expected output</div><pre><code>WARN
+warn</code></pre></div><aside class="note"><strong>Multiline and Singleline are independent.</strong> Multiline changes ^ and $. Singleline changes the dot. Enabling Multiline does not make the dot match across line breaks.</aside></section><section id="s18"><h2><small>Lesson 18</small>Regex.Escape(): use literal search text</h2><p>A user searches for <code>C++ (Basic)</code>. The plus signs and parentheses have Regex meanings, so escape the text when using it as a literal part of a pattern.</p><div class="codebox"><div class="codehead">C# / Program.cs<button class="copy" type="button">Copy</button></div><pre><code>using System;
+using System.Text.RegularExpressions;
+
+string searchText = &quot;C++ (Basic)&quot;;
+string courseList = &quot;Courses: C# Advanced, C++ (Basic), SQL&quot;;
+Regex searchRegex = new Regex(
+    Regex.Escape(searchText), RegexOptions.None, TimeSpan.FromSeconds(1));
+Console.WriteLine(searchRegex.IsMatch(courseList));</code></pre></div><div class="codebox"><div class="codehead">Expected output</div><pre><code>True</code></pre></div><p>Use Contains() for a simple literal substring search. Escape() is useful when literal user text is incorporated into a larger Regex pattern. It escapes pattern text, not replacement-string syntax.</p></section><section id="s19"><h2><small>Lesson 19</small>Greedy and lazy matching</h2><p>A line contains two bracketed tags: <code>[HR] [IT]</code>. A greedy quantifier consumes as much as it can while allowing a match; a lazy quantifier starts with as little as it can.</p><div class="codebox"><div class="codehead">C# / Program.cs<button class="copy" type="button">Copy</button></div><pre><code>using System;
+using System.Text.RegularExpressions;
+
+string input = &quot;[HR] [IT]&quot;;
+Regex greedyRegex = new Regex(
+    @&quot;\[.*\]&quot;, RegexOptions.None, TimeSpan.FromSeconds(1));
+Regex lazyRegex = new Regex(
+    @&quot;\[.*?\]&quot;, RegexOptions.None, TimeSpan.FromSeconds(1));
+Console.WriteLine($&quot;Greedy: {greedyRegex.Match(input).Value}&quot;);
+foreach (Match match in lazyRegex.Matches(input))
+    Console.WriteLine($&quot;Lazy: {match.Value}&quot;);</code></pre></div><div class="codebox"><div class="codehead">Expected output</div><pre><code>Greedy: [HR] [IT]
+Lazy: [HR]
+Lazy: [IT]</code></pre></div><div class="tablewrap"><table><thead><tr><th>Pattern</th><th>Behavior</th></tr></thead><tbody><tr><td>\[.*\]</td><td>One match spanning both bracketed tags</td></tr><tr><td>\[.*?\]</td><td>Separate shortest matches in this example</td></tr><tr><td>\[[^\]\r\n]*\]</td><td>Explicitly exclude closing brackets and line breaks inside a tag</td></tr></tbody></table></div><p>A delimiter-specific pattern is often clearer than a broad dot. These examples are for flat tags and do not parse nested bracket structures.</p></section><section id="s20"><h2><small>Lesson 20</small>Complete lab: support ticket processor</h2><p>A support team receives ticket lines such as <code>INC-1001: Login failed</code>. Validate the reference, extract the description, clean extra spaces, reject invalid records and continue processing.</p><ul><li>Reference starts with INC- and exactly four digits.</li><li>A colon separates the reference and description.</li><li>The description must contain a non-whitespace character.</li><li>Print each decision, then accepted and rejected counts.</li></ul><div class="flow" role="img" aria-label="Read a ticket line then Validate and capture fields then Check and clean description then Accept or reject; continue"><div><span>1</span>Read a ticket line</div><div><span>2</span>Validate and capture fields</div><div><span>3</span>Check and clean description</div><div><span>4</span>Accept or reject; continue</div></div><div class="codebox"><div class="codehead">C# / Program.cs<button class="copy" type="button">Copy</button></div><pre><code>using System;
+using System.Text.RegularExpressions;
+
+string[] records =
+{
+    &quot;INC-1001: Login failed&quot;,
+    &quot;INC-1002: Payment timeout&quot;,
+    &quot;INC-99: Invalid ticket number&quot;,
+    &quot;INC-1003:     &quot;,
+    &quot;INC-1004: Printer offline&quot;
+};
+Regex ticketRegex = new Regex(
+    @&quot;\A(?&lt;ticket&gt;INC-[0-9]{4}):[ \t]*(?&lt;description&gt;[^\r\n]+)\z&quot;,
+    RegexOptions.None, TimeSpan.FromSeconds(1));
+Regex whitespaceRegex = new Regex(
+    @&quot;[ \t]+&quot;, RegexOptions.None, TimeSpan.FromSeconds(1));
+int accepted = 0;
+int rejected = 0;
+
+foreach (string record in records)
+{
+    try
+    {
+        Match match = ticketRegex.Match(record);
+        if (!match.Success)
+        {
+            rejected++;
+            Console.WriteLine($&quot;Rejected: {record}&quot;);
+            continue;
+        }
+        string ticket = match.Groups[&quot;ticket&quot;].Value;
+        string description = match.Groups[&quot;description&quot;].Value.Trim();
+        if (string.IsNullOrWhiteSpace(description))
+        {
+            rejected++;
+            Console.WriteLine($&quot;Rejected: {ticket} has no description&quot;);
+            continue;
+        }
+        description = whitespaceRegex.Replace(description, &quot; &quot;);
+        accepted++;
+        Console.WriteLine($&quot;Accepted: {ticket} | {description}&quot;);
+    }
+    catch (RegexMatchTimeoutException)
+    {
+        rejected++;
+        Console.WriteLine(&quot;Rejected: matching exceeded the time limit&quot;);
+    }
+}
+Console.WriteLine();
+Console.WriteLine($&quot;Accepted records: {accepted}&quot;);
+Console.WriteLine($&quot;Rejected records: {rejected}&quot;);</code></pre></div><div class="codebox"><div class="codehead">Expected output</div><pre><code>Accepted: INC-1001 | Login failed
+Accepted: INC-1002 | Payment timeout
+Rejected: INC-99: Invalid ticket number
+Rejected: INC-1003 has no description
+Accepted: INC-1004 | Printer offline
+
+Accepted records: 3
+Rejected records: 2</code></pre></div><p>Regex verifies the record structure and captures fields. Ordinary C# checks the trimmed description. Keeping a simple business check outside the pattern makes the rule easier to read.</p><h3>Try these changes</h3><ul><li>Add a record with an empty description immediately after the colon.</li><li>Add a valid record containing repeated tabs or spaces in its description.</li><li>Add a lowercase inc- reference and observe case sensitivity.</li><li>Add a reference containing five digits and confirm rejection.</li></ul></section><section id="s21"><h2><small>Lesson 21</small>Common mistakes and reliable evaluation</h2><div class="tablewrap"><table><thead><tr><th>Mistake</th><th>Effect</th><th>Better approach</th></tr></thead><tbody><tr><td>Unanchored validation</td><td>A valid substring can pass inside invalid text</td><td>Use \A and \z for complete-input validation</td></tr><tr><td>An unescaped dot</td><td>Matches other characters</td><td>Use \. for a literal dot</td></tr><tr><td>Assuming \w means English letters</td><td>Unexpected characters are permitted</td><td>Use explicit classes for restricted identifiers</td></tr><tr><td>Using * when text is required</td><td>Empty text may pass</td><td>Use +</td></tr><tr><td>Wrong C# escaping</td><td>Pattern changes or compilation fails</td><td>Check both string and Regex syntax</td></tr><tr><td>Ignoring Match.Success</td><td>A failed match is misinterpreted</td><td>Check Success before reading fields</td></tr><tr><td>Matching date shape only</td><td>Impossible dates may pass</td><td>Use DateTime.TryParseExact()</td></tr><tr><td>Matching digits only</td><td>Range or overflow problems remain</td><td>Use TryParse() and numeric checks</td></tr><tr><td>Recreating a Regex in a loop</td><td>Unnecessary setup work</td><td>Create once and reuse</td></tr></tbody></table></div><p>Test valid input, invalid input, empty input, extra prefixes and suffixes, boundary lengths and near-matches. If input may be null, handle it before calling Regex methods.</p><p>Avoid ambiguous nested repetitions such as <code>(a+)+</code>. Backtracking patterns can take excessive time on some near-matching inputs. Use trusted patterns, reasonable input limits, appropriate timeouts and timeout handling. An invalid pattern can throw ArgumentException when the Regex is constructed; fix application-owned patterns rather than treating that as ordinary bad user input.</p><aside class="note">A timeout is a matching time budget, not a universal security boundary. The one-second limit used in examples should be adjusted to the workload.</aside></section><section id="s22"><h2><small>Lesson 22</small>When Regex is the right tool</h2><div class="tablewrap"><table><thead><tr><th>Requirement</th><th>Suitable choice</th></tr></thead><tbody><tr><td>Fixed substring</td><td>Contains()</td></tr><tr><td>Fixed prefix or suffix</td><td>StartsWith() / EndsWith()</td></tr><tr><td>Replace fixed text</td><td>string.Replace()</td></tr><tr><td>Convert a number</td><td>TryParse()</td></tr><tr><td>Validate a known date format</td><td>DateTime.TryParseExact()</td></tr><tr><td>Validate a structured identifier</td><td>Regex</td></tr><tr><td>Extract repeated references</td><td>Regex</td></tr><tr><td>Clean repeated whitespace</td><td>Regex</td></tr><tr><td>Read JSON</td><td>A JSON parser</td></tr><tr><td>Read quoted CSV fields</td><td>A CSV parser</td></tr></tbody></table></div><p>An email-shaped match does not confirm address ownership or deliverability. Use an appropriate verification workflow when those properties matter.</p></section><section id="s23"><h2><small>Lesson 23</small>Practice questions</h2><ul><li>Validate department codes containing exactly three uppercase letters followed by two digits, such as HRD12.</li><li>Extract every order reference in the format ORD-12345 from a customer message.</li><li>Clean repeated spaces and tabs from an imported address.</li><li>Split a skill list separated by commas, semicolons or vertical bars and ignore empty entries.</li><li>Extract code and quantity from Product=PRD-2045;Quantity=18.</li><li>Validate usernames containing 6–15 characters, beginning with a letter and containing only English letters, digits and underscores.</li><li>Find the whole word error in a log message without case sensitivity.</li><li>Replace dates written as 2026-11-02 with 02/11/2026 using groups, and separately check whether each date is valid.</li></ul><aside class="note"><strong>Method recap:</strong> IsMatch checks; Match finds the first; Matches finds all; Replace changes; Split separates; Escape treats pattern characters literally.</aside></section><section id="s24"><h2><small>Lesson 24</small>Official references</h2><ul><li><a href="https://learn.microsoft.com/dotnet/api/system.text.regularexpressions.regex">Microsoft Learn — Regex class</a></li><li><a href="https://learn.microsoft.com/dotnet/standard/base-types/regular-expression-language-quick-reference">Microsoft Learn — Regular expression language quick reference</a></li><li><a href="https://learn.microsoft.com/dotnet/api/system.text.regularexpressions.regex.replace">Microsoft Learn — Regex.Replace</a></li><li><a href="https://learn.microsoft.com/dotnet/api/system.text.regularexpressions.regex.split">Microsoft Learn — Regex.Split</a></li><li><a href="https://learn.microsoft.com/dotnet/api/system.text.regularexpressions.regex.matches">Microsoft Learn — Regex.Matches and lazy evaluation</a></li><li><a href="https://learn.microsoft.com/dotnet/standard/base-types/best-practices">Microsoft Learn — Regular expression best practices</a></li></ul></section></main></div><footer>ITTechGenie · Regular Expressions in C# · Learn, practise and verify</footer><script>document.querySelectorAll('.copy').forEach(b=>b.addEventListener('click',async()=>{const t=b.closest('.codebox').querySelector('code').textContent;try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(t)}else{const a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();const ok=document.execCommand('copy');a.remove();if(!ok)throw Error()}b.textContent='Copied';setTimeout(()=>b.textContent='Copy',1500)}catch{b.textContent='Select code to copy';const r=document.createRange();r.selectNodeContents(b.closest('.codebox').querySelector('code'));const s=window.getSelection();s.removeAllRanges();s.addRange(r)}}));</script></body></html>
