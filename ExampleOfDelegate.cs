@@ -26,13 +26,15 @@ namespace AbstractExample
 
             Calculator calculator = new Calculator();
             calculator.FpDelegateCalculation = new DeleGateCalculation(AddMethod);
-            calculator.CallerMethod(10, 30);
+            var ans =calculator.CallerMethod(10, 30);
         }
 
         private static int AddMethod(int x, int y)
         {
             return x + y;
         }
+
+
 
         private static int ResearchFunction1(int x, int y)
         {
