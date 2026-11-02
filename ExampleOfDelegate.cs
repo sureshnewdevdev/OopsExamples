@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,18 +12,26 @@ namespace AbstractExample
     {
         public static void Main(string[] args)
         {
-            int x = 10;
+            #region Example Basic
+            //int x = 10;
 
-            Console.WriteLine( x);
+            //Console.WriteLine( x);
 
-            ScienceCal researcher1 =  new ScienceCal(ResearchFunction2);
+            //ScienceCal researcher1 =  new ScienceCal(ResearchFunction2);
 
-            int result = researcher1(10, 90);
+            //int result = researcher1(10, 90);
 
-            Console.WriteLine(result);
+            //Console.WriteLine(result);
+            #endregion
 
+            Calculator calculator = new Calculator();
+            calculator.FpDelegateCalculation = new DeleGateCalculation(AddMethod);
+            calculator.CallerMethod(10, 30);
+        }
 
-
+        private static int AddMethod(int x, int y)
+        {
+            return x + y;
         }
 
         private static int ResearchFunction1(int x, int y)
