@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -39,7 +40,7 @@ namespace AbstractExample
         {
             int choice = 0;
 
-           
+
 
             while (true)
             {
@@ -59,9 +60,11 @@ namespace AbstractExample
                         AddNewOrder();
                         break;
                     case (int)OrderOperation.MOdifyOrder:
+                        ModifyOrder();
                         Console.WriteLine("Modifying Order");
                         break;
                     case (int)OrderOperation.DeleteOrder:
+                        DeleteOrder();
                         Console.WriteLine("Deleting Order");
                         break;
                     case (int)OrderOperation.ViewOrder:
@@ -69,11 +72,11 @@ namespace AbstractExample
                         break;
 
                     default:
-                        break;
+                        return;
                 }
 
 
- 
+
             }
             //Order order1 = new Order();
             //order1.OrderId = 1;
@@ -81,6 +84,43 @@ namespace AbstractExample
             //order1.OrderDate = DateTime.Now;
             //order1.TotalAmount = 100.50m;
 
+        }
+
+        private static void DeleteOrder()
+        {
+            Console.WriteLine("Enter Order Id to modify the other properties");
+            int orderId = int.Parse(Console.ReadLine());
+
+            int index = orders.FindIndex(ord => ord.OrderId == orderId);
+             
+            orders.RemoveAt(index);
+
+        }
+
+        private static void ModifyOrder()
+        {
+            Order order = new Order(0, "", DateTime.Now, 0);
+
+            Console.WriteLine("Enter Order Id to modify the other properties");
+            order.OrderId = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Enter Customer Name");
+            order.CustomerName = Console.ReadLine();
+            Console.WriteLine("Enter Order Date (yyyy-MM-dd)");
+            order.OrderDate = DateTime.Parse(Console.ReadLine());
+            Console.WriteLine("Enter Total Amount");
+            order.TotalAmount = decimal.Parse(Console.ReadLine());
+
+            if (isOrderExists(order.OrderId))
+            {
+                int index = orders.FindIndex(ord => ord.OrderId == order.OrderId);
+                
+                orders[index].CustomerName = order.CustomerName;
+                orders[index].OrderDate = order.OrderDate;
+                orders[index].TotalAmount = order.TotalAmount;
+
+                Console.WriteLine($"{order.OrderId} is updated");
+            }
         }
 
         private static void ViewOrders()
@@ -98,17 +138,48 @@ namespace AbstractExample
             Console.WriteLine("****************************************************************");
             Order order = new Order(0, "", DateTime.Now, 0);
 
-            Console.WriteLine("Enter Order Id");
-            order.OrderId = int.Parse(Console.ReadLine());
-            Console.WriteLine("Enter Customer Name");
-            order.CustomerName = Console.ReadLine();
-            Console.WriteLine("Enter Order Date (yyyy-MM-dd)");
-            order.OrderDate = DateTime.Parse(Console.ReadLine());
-            Console.WriteLine("Enter Total Amount");
-            order.TotalAmount = decimal.Parse(Console.ReadLine());
+            if (order != null)
+            {
 
-            orders.Add(order);
+                Console.WriteLine("Enter Order Id");
+                order.OrderId = int.Parse(Console.ReadLine());
 
+                if (order.OrderId > 0 && order.OrderId < int.MaxValue)
+                {
+
+
+                    if (!isOrderExists(order.OrderId))
+                    {
+
+                        Console.WriteLine("Enter Customer Name");
+                        order.CustomerName = Console.ReadLine();
+                        Console.WriteLine("Enter Order Date (yyyy-MM-dd)");
+                        order.OrderDate = DateTime.Parse(Console.ReadLine());
+                        Console.WriteLine("Enter Total Amount");
+                        order.TotalAmount = decimal.Parse(Console.ReadLine());
+
+                        orders.Add(order);
+
+                        Console.WriteLine($" {order.OrderId}  is added.");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Order id {order.OrderId} is already Exisits");
+
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"Invalid order id -- {order.OrderId}");
+                }
+            }
+
+
+        }
+
+        private static bool isOrderExists(int orderId)
+        {
+            return orders.Exists(o => o.OrderId == orderId);
         }
     }
 }
