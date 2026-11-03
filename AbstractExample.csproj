@@ -5,7 +5,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <StartupObject>AbstractExample.CallDelegate2</StartupObject>
+    <StartupObject>AbstractExample.OrderProcessing</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
